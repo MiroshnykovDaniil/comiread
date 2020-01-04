@@ -2,7 +2,6 @@ package com.example.demo.comics.type;
 
 import lombok.Data;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,25 +23,25 @@ public class TypeDTO {
         return typeDTO;
     }
 
-    public static TypeDTO convertToDTO(TypeDO typeDO){
-        return TypeDTO.createWithId(typeDO.getId(),typeDO.getName(),typeDO.getDescription());
+    public static TypeDTO convertToDTO(TypeEntity typeEntity){
+        return TypeDTO.createWithId(typeEntity.getId(), typeEntity.getName(), typeEntity.getDescription());
     }
 
-    public static TypeDO convertToDO(TypeDTO typeDTO){
-        return TypeDO.createWithID(typeDTO.getId(),typeDTO.getName(),typeDTO.getDescription());
+    public static TypeEntity convertToDO(TypeDTO typeDTO){
+        return TypeEntity.createWithID(typeDTO.getId(),typeDTO.getName(),typeDTO.getDescription());
     }
 
-    public static List<TypeDTO> convertListToDTO(List<TypeDO> typeDOS){
+    public static List<TypeDTO> convertListToDTO(List<TypeEntity> typeEntities){
         List<TypeDTO> typeDTOS = new ArrayList<>();
-        for (TypeDO typeDO : typeDOS) typeDTOS.add(TypeDTO.convertToDTO(typeDO));
+        for (TypeEntity typeEntity : typeEntities) typeDTOS.add(TypeDTO.convertToDTO(typeEntity));
         return typeDTOS;
     }
 
-    public static List<TypeDO> convertListToDO(List<TypeDTO> typeDTOS){
-        List<TypeDO> typeDOS = new ArrayList<>();
+    public static List<TypeEntity> convertListToDO(List<TypeDTO> typeDTOS){
+        List<TypeEntity> typeEntities = new ArrayList<>();
         for (TypeDTO typeDTO : typeDTOS){
-            typeDOS.add(TypeDO.createWithID(typeDTO.getId(),typeDTO.getName(),typeDTO.getDescription()));
+            typeEntities.add(TypeEntity.createWithID(typeDTO.getId(),typeDTO.getName(),typeDTO.getDescription()));
         }
-        return typeDOS;
+        return typeEntities;
     }
 }

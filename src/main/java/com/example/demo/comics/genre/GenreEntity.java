@@ -1,7 +1,6 @@
 package com.example.demo.comics.genre;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,21 +10,21 @@ import javax.persistence.*;
 @Table(name = "genres")
 @NoArgsConstructor
 @Data
-public class GenreDO {
+public class GenreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String description;
 
-    GenreDO(String name, String description){
+    GenreEntity(String name, String description){
         setName(name);
         setDescription(description);
     }
 
-    public static GenreDO createWithID(int id, String name, String description){
-        GenreDO genreDO = new GenreDO(name,description);
-        genreDO.setId(id);
-        return genreDO;
+    public static GenreEntity createWithID(int id, String name, String description){
+        GenreEntity genreEntity = new GenreEntity(name,description);
+        genreEntity.setId(id);
+        return genreEntity;
     }
 }

@@ -1,22 +1,19 @@
 package com.example.demo.comics.comics;
 
 
-import com.example.demo.comics.genre.GenreDO;
-import com.example.demo.comics.genre.GenreDTO;
-import com.example.demo.comics.type.TypeDO;
-import com.example.demo.comics.type.TypeDTO;
+import com.example.demo.comics.genre.GenreEntity;
+import com.example.demo.comics.type.TypeEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.Year;
 import java.util.List;
 
 @NoArgsConstructor
 @Data
 @Entity
 @Table(name = "comics")
-public class ComicsDO {
+public class ComicsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,23 +25,32 @@ public class ComicsDO {
     // Status of comics: ongoing, ended
     private String status;
 
-    //Year of release
-  //  private Year release;
-
     //genre
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "genres_id",referencedColumnName = "id")
-    private List<GenreDO> genres;
+    private List<GenreEntity> genres;
 
     //type
     @ManyToOne
     @JoinColumn(name = "type_id", referencedColumnName = "id")
-    private TypeDO type;
+    private TypeEntity type;
 
-    public ComicsDO(String name, String status, List<GenreDO> genres, TypeDO type){
+    @Column(columnDefinition = "int default 0")
+    private int volumes=0;
+
+    @Column(columnDefinition = "int default 0")
+    private int chapters = 0;
+
+    public ComicsEntity(String name, String status, List<GenreEntity> genres, TypeEntity type){
         setName(name);
         setStatus(status);
         setGenres(genres);
         setType(type);
+    }
+
+    public void addChapter(){setChapters(getChapters()+1);}
+
+    public void addVolume(){
+        setVolumes(getVolumes()+1);
     }
 }

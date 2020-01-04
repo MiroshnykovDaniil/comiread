@@ -1,11 +1,8 @@
 package com.example.demo.comics.genre;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Primary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,24 +26,24 @@ public class GenreDTO {
     }
 
 
-    public static GenreDTO convertToDTO(GenreDO genreDO){
-        return new GenreDTO(genreDO.getId(),genreDO.getName(),genreDO.getDescription());
+    public static GenreDTO convertToDTO(GenreEntity genreEntity){
+        return new GenreDTO(genreEntity.getId(), genreEntity.getName(), genreEntity.getDescription());
     }
 
-    public static List<GenreDTO> convertListToDTO(List<GenreDO> genreDOS){
+    public static List<GenreDTO> convertListToDTO(List<GenreEntity> genreEntities){
         List<GenreDTO> genreDTOS  = new ArrayList<>();
-        for(GenreDO genreDO : genreDOS){
-            genreDTOS.add(new GenreDTO(genreDO.getId(),genreDO.getName(),genreDO.getDescription()));
+        for(GenreEntity genreEntity : genreEntities){
+            genreDTOS.add(new GenreDTO(genreEntity.getId(), genreEntity.getName(), genreEntity.getDescription()));
         }
         return genreDTOS;
     }
 
-    public static List<GenreDO> convertListToDO(List<GenreDTO> genreDTOS){
-        List<GenreDO> genreDOS = new ArrayList<>();
+    public static List<GenreEntity> convertListToDO(List<GenreDTO> genreDTOS){
+        List<GenreEntity> genreEntities = new ArrayList<>();
         for (GenreDTO genreDTO : genreDTOS){
-            genreDOS.add(GenreDO.createWithID(genreDTO.getId(),genreDTO.getName(),genreDTO.getDescription()));
+            genreEntities.add(GenreEntity.createWithID(genreDTO.getId(),genreDTO.getName(),genreDTO.getDescription()));
         }
-        return genreDOS;
+        return genreEntities;
     }
 
 

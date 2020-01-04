@@ -1,11 +1,10 @@
 package com.example.demo.controller.comics;
 
 
-import com.example.demo.comics.genre.GenreDO;
+import com.example.demo.comics.genre.GenreEntity;
 import com.example.demo.comics.genre.GenreDTO;
 import com.example.demo.services.genreService.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +36,7 @@ public class GenreController {
     Create a new genre
      */
     @PostMapping("/")
-    public GenreDO createGenre(@RequestBody GenreDTO genreDTO){
+    public GenreEntity createGenre(@RequestBody GenreDTO genreDTO){
         return genreService.createGenre(genreDTO);
     }
 

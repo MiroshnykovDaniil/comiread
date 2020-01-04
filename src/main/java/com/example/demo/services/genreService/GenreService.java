@@ -1,13 +1,11 @@
 package com.example.demo.services.genreService;
 
-import com.example.demo.comics.genre.GenreDO;
+import com.example.demo.comics.genre.GenreEntity;
 import com.example.demo.comics.genre.GenreDTO;
 import com.example.demo.repository.genreRepository.GenreRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,14 +22,14 @@ public class GenreService {
     Create new genre
      */
     @Transactional
-    public GenreDO createGenre(GenreDTO genreDTO){
-        GenreDO genreDO = new GenreDO();
+    public GenreEntity createGenre(GenreDTO genreDTO){
+        GenreEntity genreEntity = new GenreEntity();
         if (genreDTO!=null){
-            genreDO.setName(genreDTO.getName());
-            genreDO.setDescription(genreDTO.getDescription());
-            return genreRepository.save(genreDO);
+            genreEntity.setName(genreDTO.getName());
+            genreEntity.setDescription(genreDTO.getDescription());
+            return genreRepository.save(genreEntity);
         }
-        return genreDO;
+        return genreEntity;
     }
 
     /*
@@ -39,7 +37,7 @@ public class GenreService {
      */
     @Transactional
     public void updateGenre(GenreDTO genreDTO){
-        GenreDO genreDO = new GenreDO();
+        GenreEntity genreEntity = new GenreEntity();
         if (genreDTO != null){
             genreRepository.updateGenreDescription(genreDTO.getName(),genreDTO.getDescription());
         }
@@ -50,8 +48,8 @@ public class GenreService {
      */
     @Transactional
     public List<GenreDTO> getAllGenres(){
-        List<GenreDO> genreDOS = genreRepository.findAll();
-        return GenreDTO.convertListToDTO(genreDOS);
+        List<GenreEntity> genreEntities = genreRepository.findAll();
+        return GenreDTO.convertListToDTO(genreEntities);
     }
 
     /*
@@ -59,7 +57,7 @@ public class GenreService {
      */
     @Transactional
     public GenreDTO getGenre(String name){
-        GenreDO genreDO = genreRepository.findByName(name);
+        GenreEntity genreEntity = genreRepository.findByName(name);
         return GenreDTO.convertToDTO(genreRepository.findByName(name));
     }
 

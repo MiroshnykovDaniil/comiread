@@ -1,6 +1,6 @@
 package com.example.demo.services.typeService;
 
-import com.example.demo.comics.type.TypeDO;
+import com.example.demo.comics.type.TypeEntity;
 import com.example.demo.comics.type.TypeDTO;
 import com.example.demo.repository.genreRepository.TypeRepository;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class TypeService {
     }
 
     public void createType(TypeDTO typeDTO){
-        typeRepository.save(new TypeDO(typeDTO.getName(),typeDTO.getDescription()));
+        typeRepository.save(new TypeEntity(typeDTO.getName(),typeDTO.getDescription()));
     }
 
     @Transactional
