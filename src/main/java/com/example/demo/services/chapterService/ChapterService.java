@@ -46,7 +46,7 @@ public class ChapterService {
         return chapter;
     }
 
-    public void addImage(List<MultipartFile> files, String comicsName, int num, String chapterName) throws IOException {
+    public void addImage(List<byte[]> files, String comicsName, int num, String chapterName) throws IOException {
         ComicsEntity comicsEntity = comicsRepository.findByName(comicsName);
         VolumeEntity volumeEntity = volumeRepository.findByVolumeNum(comicsEntity,num);
 
@@ -56,7 +56,7 @@ public class ChapterService {
 
     }
 
-    public List<MultipartFile> getImages(String comicsName, int num, String chapterName) throws IOException {
+    public List<byte[]> getImages(String comicsName, int num, String chapterName) throws IOException {
         return FileManager.getImages(comicsName,String.valueOf(num),chapterName);
     }
 }

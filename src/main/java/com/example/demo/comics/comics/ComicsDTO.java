@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -24,7 +25,10 @@ public class ComicsDTO {
     private int volumes=0;
     private int chapters = 0;
 
-    ComicsDTO(String name, String status, List<GenreDTO> genres, TypeDTO type, int volumes, int chapters){
+    private byte[] image;
+
+    ComicsDTO(int id,String name, String status, List<GenreDTO> genres, TypeDTO type, int volumes, int chapters){
+        setId(id);
         setName(name);
         setStatus(status);
         setType(type);
@@ -34,7 +38,7 @@ public class ComicsDTO {
     }
 
     public static ComicsDTO convertToDTO(ComicsEntity comicsEntity){
-        return new ComicsDTO(comicsEntity.getName(), comicsEntity.getStatus(),
+        return new ComicsDTO(comicsEntity.getId(),comicsEntity.getName(), comicsEntity.getStatus(),
                 GenreDTO.convertListToDTO(comicsEntity.getGenres()),
                 TypeDTO.convertToDTO(comicsEntity.getType()),
                 comicsEntity.getVolumes(),
@@ -44,6 +48,13 @@ public class ComicsDTO {
 
     public static ComicsEntity convertToDO(ComicsDTO comicsDTO){
         return new ComicsEntity(comicsDTO.getName(),comicsDTO.getStatus(),GenreDTO.convertListToDO(comicsDTO.getGenres()),TypeDTO.convertToDO(comicsDTO.getType()));
+    }
+
+    public static List<ComicsDTO> convertListToDTO(List<ComicsEntity> entityList){
+        List<ComicsDTO> list = new ArrayList<>();
+        for(ComicsEntity comicsEntity : entityList)
+            list.add(convertToDTO(comicsEntity));
+        return list;
     }
 
 }
