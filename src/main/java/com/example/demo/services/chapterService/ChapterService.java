@@ -1,4 +1,5 @@
 package com.example.demo.services.chapterService;
+import com.example.demo.comics.chapter.ChapterDTO;
 import com.example.demo.comics.chapter.ChapterEntity;
 import com.example.demo.comics.comics.ComicsEntity;
 import com.example.demo.comics.volume.VolumeDTO;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -58,5 +60,12 @@ public class ChapterService {
 
     public List<byte[]> getImages(String comicsName, int num, String chapterName) throws IOException {
         return FileManager.getImages(comicsName,String.valueOf(num),chapterName);
+    }
+
+    public List<ChapterDTO> getChaptersList(String comicsName){
+        List<ChapterDTO> chapterList = new ArrayList<>();
+        List<ChapterEntity> chapterEntities = chapterRepository.findByName(comicsRepository.findByName(comicsName));
+        chapterList = ChapterDTO.convertListToDTO(chapterRepository.findByName(comicsRepository.findByName(comicsName)));
+        return chapterList;
     }
 }

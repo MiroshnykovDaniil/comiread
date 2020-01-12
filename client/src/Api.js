@@ -31,4 +31,10 @@ export default {
             return data ? JSON.parse(data) : data;
         }]
     }),
+
+    getChapters:(comicsName) => instance.get("comics/"+comicsName+"/chapters/",{
+    transformResponse: [function (data) {
+        return data ? JSON.parse(data) : data;
+    }]
+}),
 }

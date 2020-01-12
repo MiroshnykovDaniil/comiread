@@ -1,6 +1,7 @@
 package com.example.demo.comics.chapter;
 
 
+import com.example.demo.comics.comics.ComicsEntity;
 import com.example.demo.comics.volume.VolumeEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,10 @@ public class ChapterEntity {
     @JoinColumn(name = "volume_id",referencedColumnName = "id")
     private VolumeEntity volume;
 
+    @ManyToOne
+    @JoinColumn(name = "commics_id",referencedColumnName = "id")
+    private ComicsEntity comics;
+
     private String name;
 
     private double num;
@@ -29,5 +34,6 @@ public class ChapterEntity {
         this.volume = volume;
         this.name = name;
         this.num = volume.getComics().getChapters();
+        this.comics = volume.getComics();
     }
 }

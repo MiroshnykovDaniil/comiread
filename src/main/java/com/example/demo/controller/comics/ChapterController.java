@@ -1,6 +1,7 @@
 package com.example.demo.controller.comics;
 
 
+import com.example.demo.comics.chapter.ChapterDTO;
 import com.example.demo.comics.chapter.ChapterEntity;
 import com.example.demo.services.chapterService.ChapterService;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -44,5 +45,10 @@ public class ChapterController {
         chapterService.addImage(list, comicsName, num, name);
         return list;
 
+    }
+
+    @GetMapping(value = "/{comicsName}/chapters/")
+    public List<ChapterDTO> getChapterList(@PathVariable String comicsName){
+        return chapterService.getChaptersList(comicsName);
     }
 }
